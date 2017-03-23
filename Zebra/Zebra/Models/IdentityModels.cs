@@ -1,19 +1,19 @@
-﻿using System.Data.Entity;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Zebra.Models
 {
-    // Vous pouvez ajouter des données de profil pour l'utilisateur en ajoutant plus de propriétés à votre classe ApplicationUser ; consultez http://go.microsoft.com/fwlink/?LinkID=317594 pour en savoir davantage.
+    // Vous pouvez ajouter des données de profil pour l'utilisateur en ajoutant d'autres propriétés à votre classe ApplicationUser, consultez http://go.microsoft.com/fwlink/?LinkID=317594 pour en savoir davantage.
     public class ApplicationUser : IdentityUser
     {
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
-            // Notez qu'authenticationType doit correspondre à l'élément défini dans CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Ajouter les revendications personnalisées de l’utilisateur ici
+            // Notez que authenticationType doit correspondre à l'instance définie dans CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);
+            // Ajouter des revendications d’utilisateur personnalisées ici
             return userIdentity;
         }
     }
@@ -24,7 +24,7 @@ namespace Zebra.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
