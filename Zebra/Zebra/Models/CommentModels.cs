@@ -5,12 +5,12 @@ using System.Web;
 
 namespace Zebra.Models
 {
-    public class Comment
+    public class CommentModels
     {
         public int ID { get; set; }
         public int ID_User { get; set; }
-        public Album ID_Album { get; set; }
-        public Music ID_Music { get; set; }
+        public AlbumModels ID_Album { get; set; }
+        public MusicModels ID_Music { get; set; }
         public string Content { get; set; }
     }
 }

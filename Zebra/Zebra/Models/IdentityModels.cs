@@ -25,7 +25,12 @@ namespace Zebra.Models
         {
         }
 
-        public static ApplicationDbContext Create()
+        public DbSet<AlbumModels> Albums { get; set; }
+        public DbSet<MusicModels> Musics { get; set; }
+        public DbSet<OrderModels> Orders { get; set; }
+        public DbSet<CommentModels> Comments { get; set; }
+
+    public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }

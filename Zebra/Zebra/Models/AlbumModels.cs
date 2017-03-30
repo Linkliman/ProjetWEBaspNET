@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zebra.Models
 {
-    public class Album
+    public class AlbumModels
     {
         public int ID { get; set; }
         [StringLength(60, MinimumLength = 1)] //on peut ajouter ErrorMessage ="..." pour message perso
