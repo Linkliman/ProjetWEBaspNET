@@ -1,12 +1,16 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity;
 
 namespace Zebra.Models
 {
-    public class DBContext : DbContext
+    public class DBContext
     {
-        public DbSet<Album> Albums { get; set; }
-        public DbSet<Music> Musics { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<AlbumModels> Albums { get; set; }
+        public DbSet<MusicModels> Musics { get; set; }
+        public DbSet<OrderModels> Orders { get; set; }
+        public DbSet<CommentModels> Comments { get; set; }
     }
 }
