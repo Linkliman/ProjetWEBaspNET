@@ -10,7 +10,7 @@ namespace Zebra.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:Y}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         public decimal prix { get; set; }
