@@ -25,6 +25,7 @@ namespace Zebra
 
             bundles.Add(new StyleBundle("~/Content/css/css").Include(
                       "~/Content/css/bootstrap.css",
+                      "~/Content/css/bootstrap.min.css",
                       "~/Content/css/site.css"));
         }
     }
