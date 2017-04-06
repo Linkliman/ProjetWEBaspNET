@@ -1,4 +1,7 @@
-﻿@model Zebra.Models.MusicModels
+﻿@using SpotifyAPI.Web.Models
+@using Zebra.Models
+
+@model AlbumModels
 
 @{
     ViewBag.Title = "Details";
@@ -9,58 +12,27 @@
 <div>
     <h4>MusicModels</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+        <p>
+            @Model.Title
+        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        <p>
+            @Model.ReleaseDate
+        </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
+        <p>
+            @Model.Genre
+        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
+        <p>
+            @Model.prix
+        </p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Genre)
-        </dt>
+        <p>
+            @Model.ID_User
+        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Genre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prix)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prix)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ID_User)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ID_User)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Note)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Note)
-        </dd>
-
-    </dl>
+        <p>
+            @Model.Note
+        </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

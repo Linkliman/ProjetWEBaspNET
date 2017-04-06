@@ -15,7 +15,7 @@ namespace Zebra.Models
         public string Title { get; set; }
         public List<Image> Image { get; set; }
         public string ReleaseDate { get; set; }
-        public string Genre { get; set; }
+        public List<string> Genre { get; set; }
         public decimal prix { get; set; }
         public int Note { get; set; }
         public List<SimpleArtist> ID_User { get; set; }

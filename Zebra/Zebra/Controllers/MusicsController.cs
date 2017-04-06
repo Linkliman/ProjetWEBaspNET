@@ -27,36 +27,18 @@ namespace Zebra.Controllers
         }
 
         // GET: Musics/Id
-        public ActionResult Album(string Id)
+        public ActionResult MusicDetails(string Title)
         {
-            FullAlbum album = _spotify.GetAlbum("5O7V8l4SeXTymVp3IesT9C");
-            AlbumModels v = new AlbumModels
+            // GET: Musics/MusicDetails/5
+            FullTrack track = _spotify.GetTrack("6Y1CLPwYe7zvI8PJiWVz6T");
+            MusicModels v = new MusicModels
             {
-                ID = album.Id,
-                Title = album.Name,
-                Image = album.Images,
-                ReleaseDate = album.ReleaseDate,
-                Note = album.Popularity,
-                ID_User = album.Artists,
-
+                Title = track.Name,
+                Note = track.Popularity,
+                ID_User = track.Artists,
             };
             return View(v);
     }
-
-        // GET: Musics/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MusicModels musicModels = db.Musics.Find(id);
-            if (musicModels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(musicModels);
-        }
 
         // GET: Musics/Create
         public ActionResult Create()

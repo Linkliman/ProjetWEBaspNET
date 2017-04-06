@@ -1,0 +1,35 @@
+﻿@using SpotifyAPI.Web.Models
+@using Zebra.Models
+
+@model MusicModels
+
+@{
+    ViewBag.Title = "MusicDetails";
+}
+
+<h2>Music</h2>
+
+<div>
+    <h4>Models</h4>
+    <hr />
+    <p>
+        @Model.Title
+    </p>
+
+    <p>
+        @Model.Genre
+    </p>
+
+    <p>
+        @Model.prix
+    </p>
+
+    <p>
+        @Model.ID_User
+    </p>
+
+    <p>
+        @Model.Note
+    </p>
+</div>
+
