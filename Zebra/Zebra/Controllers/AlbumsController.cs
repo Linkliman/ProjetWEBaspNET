@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -14,6 +16,11 @@ namespace Zebra.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        SpotifyWebAPI _spotify = new SpotifyWebAPI()
+        {
+            UseAuth = false, //This will disable Authentication.
+        };
+
         // GET: Albums
         public ActionResult Index()
         {
@@ -21,18 +28,18 @@ namespace Zebra.Controllers
         }
 
         // GET: Albums/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
-            if (id == null)
+            FullAlbum album = _spotify.GetAlbum("5O7V8l4SeXTymVp3IesT9C");
+            AlbumModels v = new AlbumModels
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            AlbumModels albumModels = db.Albums.Find(id);
-            if (albumModels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(albumModels);
+                Title = album.Name,
+                ReleaseDate = album.ReleaseDate,
+                Genre =album.Genres,
+                ID_User = album.Artists,
+                Note = album.Popularity
+            };
+            return View(v);
         }
 
         // GET: Albums/Create
