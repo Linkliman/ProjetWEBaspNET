@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,12 +15,33 @@ namespace Zebra.Controllers
     public class MusicsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        SpotifyWebAPI _spotify = new SpotifyWebAPI()
+        {
+            UseAuth = false, //This will disable Authentication.
+        };
 
         // GET: Musics
         public ActionResult Index()
         {
             return View(db.Musics.ToList());
         }
+
+        // GET: Musics/Id
+        public ActionResult Album(string Id)
+        {
+            FullAlbum album = _spotify.GetAlbum("5O7V8l4SeXTymVp3IesT9C");
+            AlbumModels v = new AlbumModels
+            {
+                ID = album.Id,
+                Title = album.Name,
+                Image = album.Images,
+                ReleaseDate = album.ReleaseDate,
+                Note = album.Popularity,
+                ID_User = album.Artists,
+
+            };
+            return View(v);
+    }
 
         // GET: Musics/Details/5
         public ActionResult Details(int? id)
