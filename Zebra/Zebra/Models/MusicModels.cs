@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyAPI.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Zebra.Models
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         public decimal prix { get; set; }
-        public int ID_User { get; set; }
+        public List<SimpleArtist> ID_User { get; set; }
         public int Note { get; set; }
         public AlbumModels ID_Album { get; set; }
     }

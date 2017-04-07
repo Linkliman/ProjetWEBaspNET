@@ -1,4 +1,7 @@
-﻿using System;
+﻿using SpotifyAPI.Web;
+using SpotifyAPI.Web.Enums;
+using SpotifyAPI.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -13,6 +16,10 @@ namespace Zebra.Controllers
     public class MusicsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        SpotifyWebAPI _spotify = new SpotifyWebAPI()
+        {
+            UseAuth = false, //This will disable Authentication.
+        };
 
         // GET: Musics
         public ActionResult Index()
@@ -20,19 +27,24 @@ namespace Zebra.Controllers
             return View(db.Musics.ToList());
         }
 
-        // GET: Musics/Details/5
-        public ActionResult Details(int? id)
+        // GET: Musics/MusicDetails/5
+        public ActionResult MusicDetails(string Title)
         {
-            if (id == null)
+            FullTrack track = _spotify.GetTrack("6Y1CLPwYe7zvI8PJiWVz6T");
+            MusicModels v = new MusicModels
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            MusicModels musicModels = db.Musics.Find(id);
-            if (musicModels == null)
-            {
-                return HttpNotFound();
-            }
-            return View(musicModels);
+                Title = track.Name,
+                Note = track.Popularity,
+                ID_User = track.Artists,
+            };
+            return View(v);
+        }
+
+        // GET: Musics/SearchMusic/5
+        public ActionResult SearchMusic(string recherche)
+        {
+            SearchItem item = _spotify.SearchItems("roadhouse+blues", SearchType.Track);
+            return View(item.Tracks);
         }
 
         // GET: Musics/Create
