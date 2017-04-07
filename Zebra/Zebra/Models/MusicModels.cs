@@ -9,7 +9,7 @@ namespace Zebra.Models
 {
     public class MusicModels
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Title { get; set; }
         [DisplayFormat(DataFormatString = "{0:Y}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
