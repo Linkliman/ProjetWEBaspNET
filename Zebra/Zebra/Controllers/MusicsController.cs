@@ -47,6 +47,22 @@ namespace Zebra.Controllers
             return View(item.Tracks);
         }
 
+        // GET: MyMusics
+        [HttpGet]
+        public ActionResult MyMusics()
+        {
+            List<MusicModels> item = new List<MusicModels>();
+            foreach (var m in db.Musics)
+            {
+                if (m.Created_by == User.Identity.Name)
+                {
+                    item.Add(m);
+                }
+            }
+            ViewBag.Liste = item;
+            return View();
+        }
+
         // GET: Musics/Create
         public ActionResult Create()
         {
@@ -62,6 +78,7 @@ namespace Zebra.Controllers
         {
             if (ModelState.IsValid)
             {
+                musicModels.Created_by=User.Identity.Name;
                 db.Musics.Add(musicModels);
                 db.SaveChanges();
                 return RedirectToAction("Index");

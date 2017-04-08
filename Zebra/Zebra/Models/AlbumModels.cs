@@ -19,5 +19,6 @@ namespace Zebra.Models
         public decimal prix { get; set; }
         public int Note { get; set; }
         public List<SimpleArtist> ID_User { get; set; }
+        public string Created_by { get; set; }
     }
 }
