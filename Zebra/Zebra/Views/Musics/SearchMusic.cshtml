@@ -9,11 +9,20 @@
 
 <h2>Search</h2>
 
-<div>
-    <ul>
-        @foreach (var music in Model.Items)
-        {
-            <li>@music.Name</li>
-        }
-    </ul>
-</div>
+
+<table class="table">
+    
+    @foreach (var item in Model.Items)
+    {
+        <thead>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Popularity)
+                </td>
+            </tr>
+        </thead>
+    }
+</table>

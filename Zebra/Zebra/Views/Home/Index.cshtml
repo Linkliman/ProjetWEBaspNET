@@ -2,10 +2,11 @@
     <row>
             <div class="form-group">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Rechercher">
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">Allez</button>
-                </span>
+                @using (Html.BeginForm("SearchMusic", "Musics"))
+                {
+                    @Html.TextBox("recherche")
+                    <input type="submit" value="Rechercher" />
+                }
             </div>
         </div>
     </row>

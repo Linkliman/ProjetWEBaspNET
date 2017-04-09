@@ -323,6 +323,7 @@
     <Content Include="Views\Musics\MusicDetails.cshtml" />
     <Content Include="Views\Musics\SearchMusic.cshtml" />
     <Content Include="Views\Musics\MyMusics.cshtml" />
+    <Content Include="Views\Musics\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

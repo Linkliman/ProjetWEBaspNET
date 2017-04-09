@@ -43,7 +43,7 @@ namespace Zebra.Controllers
         // GET: Musics/SearchMusic/5
         public ActionResult SearchMusic(string recherche)
         {
-            SearchItem item = _spotify.SearchItems("roadhouse+blues", SearchType.Track);
+            SearchItem item = _spotify.SearchItems("recherche", SearchType.Track);
             return View(item.Tracks);
         }
 

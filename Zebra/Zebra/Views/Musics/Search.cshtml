@@ -1,0 +1,19 @@
+﻿@using SpotifyAPI.Web.Models
+@using Zebra.Models
+
+@model Paging<SpotifyAPI.Web.Models.FullTrack>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+<div>
+    <ul>
+        @foreach (var music in Model.Items)
+        {
+            <li>@music.Name</li>
+        }
+    </ul>
+</div>

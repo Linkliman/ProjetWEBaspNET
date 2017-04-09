@@ -27,5 +27,5 @@ namespace Zebra.Controllers
 
             return View();
         }
-     }
+    }
 }
