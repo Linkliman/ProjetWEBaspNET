@@ -1,6 +1,5 @@
-﻿@using Zebra.Models
-
-@model List<MusicModels>
+﻿
+@model IEnumerable<Zebra.Models.MusicModels>
 
 @{
     ViewBag.Title = "MyMusics";
@@ -8,12 +7,60 @@
 
 <h2>Mes Musiques</h2>
 
-@Html.ActionLink("Ajouter", "Create", "Musics", new { @class = "btn btn-info" })
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th></th>
+    </tr>
 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID_User)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "MusicDetails", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
-<body>
-    <ul>
-        
-    </ul>
-</body>
+</table>

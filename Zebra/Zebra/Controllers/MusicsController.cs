@@ -59,8 +59,7 @@ namespace Zebra.Controllers
                     item.Add(m);
                 }
             }
-            ViewBag.Liste = item;
-            return View();
+            return View(item);
         }
 
         // GET: Musics/Create
@@ -81,7 +80,7 @@ namespace Zebra.Controllers
                 musicModels.Created_by=User.Identity.Name;
                 db.Musics.Add(musicModels);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyMusics");
             }
 
             return View(musicModels);
@@ -111,9 +110,10 @@ namespace Zebra.Controllers
         {
             if (ModelState.IsValid)
             {
+                musicModels.Created_by = User.Identity.Name;
                 db.Entry(musicModels).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyMusics");
             }
             return View(musicModels);
         }
@@ -141,7 +141,7 @@ namespace Zebra.Controllers
             MusicModels musicModels = db.Musics.Find(id);
             db.Musics.Remove(musicModels);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyMusics");
         }
 
         protected override void Dispose(bool disposing)
