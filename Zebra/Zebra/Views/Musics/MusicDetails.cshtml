@@ -10,25 +10,33 @@
 <h2>Music</h2>
 
 <div>
-    <h4>Models</h4>
+    <h4>Détails</h4>
     <hr />
     <p>
+        Titre : 
         @Model.Title
     </p>
 
     <p>
+        Artists : 
+        @foreach (var art in Model.ID_User)
+        {
+            @art.Name
+        }
+    </p>
+
+    <p>
+        Genre : 
         @Model.Genre
     </p>
 
     <p>
+        Prix : 
         @Model.prix
     </p>
 
     <p>
-        @Model.ID_User
-    </p>
-
-    <p>
+        Populatité : 
         @Model.Note
     </p>
 </div>

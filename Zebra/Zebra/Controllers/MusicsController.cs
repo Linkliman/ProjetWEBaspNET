@@ -28,9 +28,9 @@ namespace Zebra.Controllers
         }
 
         // GET: Musics/MusicDetails/5
-        public ActionResult MusicDetails(string Title)
+        public ActionResult MusicDetails(string Id)
         {
-            FullTrack track = _spotify.GetTrack("6Y1CLPwYe7zvI8PJiWVz6T");
+            FullTrack track = _spotify.GetTrack(Id);
             MusicModels v = new MusicModels
             {
                 Title = track.Name,
@@ -43,7 +43,7 @@ namespace Zebra.Controllers
         // GET: Musics/SearchMusic/5
         public ActionResult SearchMusic(string recherche)
         {
-            SearchItem item = _spotify.SearchItems("recherche", SearchType.Track);
+            SearchItem item = _spotify.SearchItems(recherche, SearchType.Track);
             return View(item.Tracks);
         }
 
