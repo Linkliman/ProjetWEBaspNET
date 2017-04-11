@@ -19,10 +19,14 @@
 
     <p>
         Artists : 
-        @foreach (var art in Model.ID_User)
+        @if (Model.ID_User != null)
         {
-            @art.Name
+            foreach (var art in Model.ID_User)
+            {
+                @art.Name
+            }
         }
+        @Model.Created_by
     </p>
 
     <p>
@@ -32,9 +36,12 @@
 
     <p>
         Genre : 
-        @foreach (var gen in Model.Genre)
+        @if (Model.Genre != null)
         {
-            @gen
+            foreach (var gen in Model.Genre)
+            {
+                @gen
+            }
         }
     </p>
 

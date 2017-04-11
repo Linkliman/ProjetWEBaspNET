@@ -79,6 +79,11 @@ namespace Zebra.Models
         [Display(Name = "Confirmer le mot de passe ")]
         [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Pseudo")]
+        public string Pseudo { get; set; }
     }
 
     public class ResetPasswordViewModel

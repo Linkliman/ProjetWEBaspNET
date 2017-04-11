@@ -30,18 +30,29 @@ namespace Zebra.Controllers
         // GET: Musics/MusicDetails/5
         public ActionResult MusicDetails(string Id)
         {
+            foreach (var m in db.Musics)
+            {
+                if (m.ID.ToString() == Id)
+                {
+                    return View(m);
+                }
+            }
             FullTrack track = _spotify.GetTrack(Id);
-            FullAlbum album = _spotify.GetAlbum(track.Album.Id);
+            FullAlbum album = null;
             MusicModels v = new MusicModels
             {
                 Title = track.Name,
-                Album = track.Album.Name,
-                Genre = album.Genres,
-                ReleaseDate = DateTime.Parse(album.ReleaseDate),
-                prix = track.Popularity/7,
+                prix = track.Popularity / 7,
                 Note = track.Popularity,
                 ID_User = track.Artists,
             };
+            if (track.Album != null)
+            {
+                album = _spotify.GetAlbum(track.Album.Id);
+                v.Album = album.Name;
+                v.Genre = album.Genres;
+                v.ReleaseDate = DateTime.Parse(album.ReleaseDate);
+            }
             return View(v);
         }
 
