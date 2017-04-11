@@ -13,11 +13,12 @@ namespace Zebra.Models
         public string Title { get; set; }
         [DisplayFormat(DataFormatString = "{0:Y}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
-        public string Genre { get; set; }
+        public List<string> Genre { get; set; }
         public decimal prix { get; set; }
         public List<SimpleArtist> ID_User { get; set; }
         public string Created_by { get; set; }
         public int Note { get; set; }
         public AlbumModels ID_Album { get; set; }
+        public string Album { get; set; }
     }
 }

@@ -237,6 +237,14 @@
     <Compile Include="Migrations\201704082225399_Created_By.Designer.cs">
       <DependentUpon>201704082225399_Created_By.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704110945101_AlbumType.cs" />
+    <Compile Include="Migrations\201704110945101_AlbumType.Designer.cs">
+      <DependentUpon>201704110945101_AlbumType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704111211548_AlbumType2.cs" />
+    <Compile Include="Migrations\201704111211548_AlbumType2.Designer.cs">
+      <DependentUpon>201704111211548_AlbumType2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AlbumModels.cs" />
@@ -362,6 +370,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704082225399_Created_By.resx">
       <DependentUpon>201704082225399_Created_By.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704110945101_AlbumType.resx">
+      <DependentUpon>201704110945101_AlbumType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704111211548_AlbumType2.resx">
+      <DependentUpon>201704111211548_AlbumType2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

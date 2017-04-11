@@ -31,9 +31,14 @@ namespace Zebra.Controllers
         public ActionResult MusicDetails(string Id)
         {
             FullTrack track = _spotify.GetTrack(Id);
+            FullAlbum album = _spotify.GetAlbum(track.Album.Id);
             MusicModels v = new MusicModels
             {
                 Title = track.Name,
+                Album = track.Album.Name,
+                Genre = album.Genres,
+                ReleaseDate = DateTime.Parse(album.ReleaseDate),
+                prix = track.Popularity/7,
                 Note = track.Popularity,
                 ID_User = track.Artists,
             };
@@ -44,6 +49,19 @@ namespace Zebra.Controllers
         public ActionResult SearchMusic(string recherche)
         {
             SearchItem item = _spotify.SearchItems(recherche, SearchType.Track);
+            List<MusicModels> liste = new List<MusicModels>();
+            foreach (var m in db.Musics)
+            {
+                if ((m.Title != null) && (m.Title.IndexOf(recherche) == 0))
+                {
+                    liste.Add(m);
+                }
+                if ((m.Created_by != null) && (m.Created_by.IndexOf(recherche) == 0))
+                {
+                    liste.Add(m);
+                }
+            }
+            ViewBag.Recherche=(liste as IEnumerable<MusicModels>);
             return View(item.Tracks);
         }
 

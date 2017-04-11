@@ -11,6 +11,22 @@
 
 
 <table class="table">
+    @foreach (var item in @ViewBag.Recherche)
+    {
+        <thead>
+            <tr>
+                <td>
+                    @item.Title
+                </td>
+                <td>
+                    @item.Created_by
+                </td>
+                <td>
+                    @item.Note
+                </td>
+            </tr>
+        </thead>
+    }
     
     @foreach (var item in Model.Items)
     {
@@ -23,6 +39,7 @@
                     @foreach (var art in item.Artists)
                     {
                         @art.Name
+                        <p> </p>
                     }
                 </td>
                 <td>

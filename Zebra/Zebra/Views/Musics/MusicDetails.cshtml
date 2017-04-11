@@ -26,8 +26,21 @@
     </p>
 
     <p>
+        Album :
+        @Model.ID_Album
+    </p>
+
+    <p>
         Genre : 
-        @Model.Genre
+        @foreach (var gen in Model.Genre)
+        {
+            @gen
+        }
+    </p>
+
+    <p>
+        Date de sortie :
+        @Model.ReleaseDate
     </p>
 
     <p>
