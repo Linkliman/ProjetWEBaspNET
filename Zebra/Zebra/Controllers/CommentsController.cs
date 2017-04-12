@@ -17,15 +17,19 @@ namespace Zebra.Controllers
         // GET: Comments
         public ActionResult Index(int Id)
         {
-            List<CommentModels> item = new List<CommentModels>();
+            CommentModelsVM vm = new CommentModelsVM()
+            {
+                Music = Id,
+                Comments = new List<CommentModels>(),
+            };
             foreach (var c in db.Comments)
             {
                 if (c.Music == Id)
                 {
-                    item.Add(c);
+                    vm.Comments.Add(c);
                 }
             }
-            return View(item);
+            return View(vm);
         }
 
         // GET: Comments/Details/5
@@ -46,7 +50,12 @@ namespace Zebra.Controllers
         // GET: Musics/Create
         public ActionResult Create(int Id)
         {
-            return View();
+            CommentModelsVM commentvm = new CommentModelsVM()
+            {
+                Comment = new CommentModels(),
+                Music = Id,
+            };
+            return View(commentvm);
         }
 
         // POST: Musics/Create
@@ -54,12 +63,13 @@ namespace Zebra.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ID_User,Music,ID_Album,ID_Music,Content")] CommentModels comment)
+        public ActionResult Create([Bind(Include = "ID,ID_User,ID_Music,Content")] CommentModels comment)
         {
             comment.ID_User = User.Identity.Name;
+            comment.Music = int.Parse(Request.Form["Id"]);
             db.Comments.Add(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = comment.Music });
         }
 
         // GET: Comments/Edit/5
@@ -86,9 +96,12 @@ namespace Zebra.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(commentModels).State = EntityState.Modified;
+                string aux = commentModels.Content;
+                CommentModels comment = db.Comments.Find(commentModels.ID);
+                comment.Content = aux;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = comment.Music });
             }
             return View(commentModels);
         }
@@ -114,9 +127,10 @@ namespace Zebra.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             CommentModels commentModels = db.Comments.Find(id);
+            int aux = commentModels.Music;
             db.Comments.Remove(commentModels);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = aux });
         }
 
         protected override void Dispose(bool disposing)
@@ -126,16 +140,6 @@ namespace Zebra.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private List<CommentModels> GetComments()
-        {
-            List<CommentModels> comments = new List<CommentModels>();
-            comments.Add(new CommentModels { ID = 1, Music = 1, ID_User = "Pierre", Content = "Master1" });
-            comments.Add(new CommentModels { ID = 2, Music = 1, ID_User = "Paul", Content = "Paul" });
-            comments.Add(new CommentModels { ID = 3, Music = 1, ID_User = "Jacques", Content = "Lucien" });
-            comments.Add(new CommentModels { ID = 4, Music = 1, ID_User = "Franck", Content = "Nadine" });
-            return comments;
         }
     }
 }

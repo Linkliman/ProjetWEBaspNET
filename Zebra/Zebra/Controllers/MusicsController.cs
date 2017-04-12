@@ -30,6 +30,7 @@ namespace Zebra.Controllers
         // GET: Musics/MusicDetails/5
         public ActionResult MusicDetails(string Id)
         {
+            
             foreach (var m in db.Musics)
             {
                 if (m.ID.ToString() == Id)
