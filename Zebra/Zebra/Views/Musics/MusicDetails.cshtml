@@ -59,5 +59,8 @@
         Populatité : 
         @Model.Note
     </p>
+    <p>
+        @Html.ActionLink("Voir les commentaires", "Index", "Comments", new { id = Model.ID }, null)
+    </p>
 </div>
 

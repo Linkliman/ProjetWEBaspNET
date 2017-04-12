@@ -24,6 +24,9 @@
                 <td>
                     @item.Note
                 </td>
+                <td>
+                    @Html.ActionLink("Details", "MusicDetails", new { id = item.Id })
+                </td>
             </tr>
         </thead>
     }
