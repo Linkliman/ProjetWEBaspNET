@@ -181,5 +181,10 @@ namespace Zebra.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Play(int musicID)
+        {
+            var file = Server.MapPath("~/Content/Musique/" + musicID.ToString() + ".mp3");
+            return File(file, "audio/mp3");
+        }
     }
 }
