@@ -10,6 +10,7 @@
             @Html.ActionLink("Bonjour " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li>@Html.ActionLink("Mes musiques", "MyMusics", "Musics") </li>
+        <li>@Html.ActionLink("Mes albums", "MyAlbums", "Albums") </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
     </ul>
     }

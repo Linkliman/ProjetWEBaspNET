@@ -20,5 +20,6 @@ namespace Zebra.Models
         public int Note { get; set; }
         public List<SimpleArtist> ID_User { get; set; }
         public string Created_by { get; set; }
+        public List<MusicModels> Musics { get; set; }
     }
 }

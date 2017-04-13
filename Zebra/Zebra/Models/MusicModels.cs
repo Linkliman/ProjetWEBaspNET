@@ -10,6 +10,7 @@ namespace Zebra.Models
     public class MusicModels
     {
         public int ID { get; set; }
+        public string ID_Spotify { get; set; }
         public string Title { get; set; }
         [DisplayFormat(DataFormatString = "{0:Y}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
@@ -20,5 +21,7 @@ namespace Zebra.Models
         public int Note { get; set; }
         public AlbumModels ID_Album { get; set; }
         public string Album { get; set; }
+
+        public string PreviewUrl { get; set; }
     }
 }

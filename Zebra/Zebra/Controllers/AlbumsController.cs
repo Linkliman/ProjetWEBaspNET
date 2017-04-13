@@ -27,10 +27,25 @@ namespace Zebra.Controllers
             return View(db.Albums.ToList());
         }
 
+        // GET: MyAlbums
+        [HttpGet]
+        public ActionResult MyAlbums()
+        {
+            List<AlbumModels> item = new List<AlbumModels>();
+            foreach (var m in db.Albums)
+            {
+                if (m.Created_by == User.Identity.Name)
+                {
+                    item.Add(m);
+                }
+            }
+            return View(item);
+        }
+
         // GET: Albums/Details/5
         public ActionResult Details(string id)
         {
-            FullAlbum album = _spotify.GetAlbum("5O7V8l4SeXTymVp3IesT9C");
+            FullAlbum album = _spotify.GetAlbum(id);
             AlbumModels v = new AlbumModels
             {
                 Title = album.Name,
@@ -56,13 +71,46 @@ namespace Zebra.Controllers
         {
             if (ModelState.IsValid)
             {
+                albumModels.Created_by = User.Identity.Name;
                 db.Albums.Add(albumModels);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyAlbums");
             }
 
             return View(albumModels);
         }
+
+
+        // GET: Albums/Musics
+        public ActionResult Musics(int id)
+        {
+            AlbumModelsVM res = new AlbumModelsVM()
+            {
+                ID_album = id,
+                music = new MusicModels()
+            };
+            return View(res);
+        }
+
+        // POST: Albums/Musics
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Musics([Bind(Include = "ID,Title,ReleaseDate,Genre,prix,ID_User,Note,Musics")] AlbumModels albumModels)
+        {
+            AlbumModels album = new AlbumModels();
+            album = db.Albums.Find(int.Parse(Request.Form["Id"]));
+            album.Musics = new List<MusicModels>();
+            foreach (var m in db.Musics) {
+                if (m.Title == albumModels.Musics.First().Title) {
+                    album.Musics.Add(m);
+                    db.Entry(album).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("MyAlbums");
+                }
+            }
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
+
 
         // GET: Albums/Edit/5
         public ActionResult Edit(int? id)
@@ -88,9 +136,10 @@ namespace Zebra.Controllers
         {
             if (ModelState.IsValid)
             {
+                albumModels.Created_by = User.Identity.Name;
                 db.Entry(albumModels).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("MyAlbums");
             }
             return View(albumModels);
         }
@@ -118,7 +167,7 @@ namespace Zebra.Controllers
             AlbumModels albumModels = db.Albums.Find(id);
             db.Albums.Remove(albumModels);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyAlbums");
         }
 
         protected override void Dispose(bool disposing)
