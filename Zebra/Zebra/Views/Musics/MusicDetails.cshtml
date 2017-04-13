@@ -60,6 +60,10 @@
         @Model.Note
     </p>
 
+    <p>
+        @Html.ActionLink("Acheter","Create","Orders", new { music = Model } , new AjaxOptions { HttpMethod = "POST" })
+    </p>
+
     @{if (Model.Created_by != null)
         {
             if (ViewBag.Boolean)

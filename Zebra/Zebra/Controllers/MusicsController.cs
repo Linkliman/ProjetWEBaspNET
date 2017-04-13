@@ -28,6 +28,20 @@ namespace Zebra.Controllers
             return View(db.Musics.ToList());
         }
 
+        public bool IsBuy(string currentIdUser, string idMusic)
+        {
+            var isbuybycurrent = new List<OrderModels>();
+            isbuybycurrent = db.Orders.Where(u => u.ID_User.ToString() == currentIdUser.ToString()).Where(u => u.ID_Music.ID.ToString() == idMusic.ToString()).ToList();
+            if (isbuybycurrent.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         // GET: Musics/MusicDetails/5
         public ActionResult MusicDetails(string Id)
         {
@@ -41,7 +55,7 @@ namespace Zebra.Controllers
             }
             FullTrack track = _spotify.GetTrack(Id);
             FullAlbum album = null;
-            //ViewBag.Boolean = OrdersController.IsBuy(User.Identity.GetUserId().ToString(), Id); GROS PROBLEME
+            ViewBag.Boolean = IsBuy(User.Identity.GetUserId().ToString(), Id);
             MusicModels v = new MusicModels
             {
                 Title = track.Name,

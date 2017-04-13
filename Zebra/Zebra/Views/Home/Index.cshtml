@@ -1,11 +1,11 @@
 ﻿<div style="vertical-align:middle">
     <row>
             <div class="form-group">
-            <div class="input-group">
+            <div class="input-group col-lg-12 col-md-12">
                 @using (Html.BeginForm("SearchMusic", "Musics"))
                 {
-                    @Html.TextBox("recherche")
-                    <input type="submit" value="Rechercher" />
+                    @Html.TextBox("recherche",null,new {@class = "form-control"})
+                    <input type="submit" class="form-control btn btn-primary" value="Rechercher" />
                 }
             </div>
         </div>
