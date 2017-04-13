@@ -62,11 +62,14 @@
 
     @{if (Model.Created_by != null)
         {
+            if (ViewBag.Boolean)
+            {
             <audio controls="controls" preload="auto">
                 <source src="@Url.Action("Play", new { musicID = Model.ID })" type="audio/mp3" />
                 Votre navigateur ne supporte pas la balise HTML5 audio
             </audio>
-            }
+                    }
+                }
         }
 
     <p>
