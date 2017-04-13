@@ -7,7 +7,8 @@
 <h2>Commentaires</h2>
 
 <table class="table" style="border-top : 0">
-    <tr>
+    <thead>
+        <tr>
         <th>
             @Html.DisplayNameFor(model => model.Comment.Content)
         </th>
@@ -15,6 +16,7 @@
             @Html.DisplayNameFor(model => model.Comment.ID_User)
         </th>
     </tr>
+    </thead>
 
 @if (Model.Comments.Count() != 0)
 {

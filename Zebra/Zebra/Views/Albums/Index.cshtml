@@ -4,12 +4,11 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Mes albums</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+
 <table class="table">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -31,6 +30,7 @@
         </th>
         <th></th>
     </tr>
+        </thead>
 
 @foreach (var item in Model) {
     <tr>
@@ -61,3 +61,6 @@
 }
 
 </table>
+µ<div>
+    <input type="button" class="btn btn-default" style="float:right" value="Commenter" onclick="location.href='@Url.Action("Create", "Albums")'" />
+</div>

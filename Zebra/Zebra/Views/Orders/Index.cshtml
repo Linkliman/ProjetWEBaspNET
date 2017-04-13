@@ -7,22 +7,23 @@
 <h2>Mes achats</h2>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID_User)
-        </th>
-        <th></th>
-    </tr>
-@if (Model != null)
-{
-foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ID_User)
-            @Html.DisplayFor(modelItem => item.ID_Music)
-        </td>
-    </tr>
-}
-}
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID_User)
+            </th>
+        </tr>
+        </thead>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID_User)
+                        @Html.DisplayFor(modelItem => item.ID_Music)
+                    </td>
+                </tr>
+            }
+        }
 </table>
