@@ -58,7 +58,7 @@ namespace Zebra.Controllers
                 OrderModels order = new OrderModels()
                 {
                     ID_Album = null,
-                    ID_Music = music, //pas sur que ça soit cool qu'on est un id_music de type MusicModels cf plus haut
+                    ID_Music = music, 
                     ID_User = Convert.ToInt32(User.Identity.GetUserId()),
                 };
                 db.Orders.Add(order);

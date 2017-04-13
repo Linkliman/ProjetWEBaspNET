@@ -8,9 +8,6 @@
 <h2>Mes Musiques</h2>
 
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -58,3 +55,7 @@
     }
 
 </table>
+
+<div>
+    <input type="button" class="btn btn-default" style="float:right" value="Commenter" onclick="location.href='@Url.Action("Create", "Musics")'" />
+</div>

@@ -4,12 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Commentaires</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create", new { id = Model.Music} )
-</p>
-<table class="table">
+<table class="table" style="border-top : 0">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Comment.Content)
@@ -40,3 +37,7 @@
 }
 
 </table>
+
+<div>
+    <input type="button" class="btn btn-default" style="float:right" value="Commenter" onclick="location.href='@Url.Action("Create", "Comments", new { id = Model.Music} )'" />
+</div>
