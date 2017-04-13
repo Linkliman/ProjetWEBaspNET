@@ -55,8 +55,32 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ID_User)
+            @if (Model.ID_User != null)
+            {
+                foreach (var art in Model.ID_User)
+                {
+                    @art.Name
+                }
+            }
+            @Model.Created_by
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Musics)
+        </dt>
+        <dd>
+            @if (Model.Musics != null)
+            {
+                
+                foreach (var m in Model.Musics)
+                {
+                    @m.Title
+                    <br/>
+                }
+            }
+        </dd>
+
+
 
     </dl>
 </div>
