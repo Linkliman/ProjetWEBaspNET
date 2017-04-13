@@ -58,10 +58,12 @@ namespace Zebra.Controllers
             ViewBag.Boolean = IsBuy(User.Identity.GetUserId().ToString(), Id);
             MusicModels v = new MusicModels
             {
+                ID_Spotify = Id,
                 Title = track.Name,
                 prix = track.Popularity / 7,
                 Note = track.Popularity,
                 ID_User = track.Artists,
+                PreviewUrl = track.PreviewUrl,
             };
             if (track.Album != null)
             {
