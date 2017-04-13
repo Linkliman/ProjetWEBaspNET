@@ -38,3 +38,12 @@ ul.nav ul.navbar-nav ul.navbar-right
     border:0px;
 }
 
+a
+{
+    color:black;
+}
+
+a:hover
+{
+    color:gray !important;
+}

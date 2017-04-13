@@ -70,7 +70,6 @@ namespace Zebra.Controllers
             {
                 album = _spotify.GetAlbum(track.Album.Id);
                 v.Album = album.Name;
-                v.Genre = album.Genres;
                 v.ReleaseDate = DateTime.Parse(album.ReleaseDate);
             }
             return View(v);

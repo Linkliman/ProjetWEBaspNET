@@ -7,15 +7,15 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Bonjour " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Bonjour " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @style = "color:black" })
         </li>
-        <li>@Html.ActionLink("Mes musiques", "MyMusics", "Musics") </li>
+        <li>@Html.ActionLink("Mes musiques", "MyMusics", "Musics",null, new { @style = "color:black" }) </li>
 
-        <li>@Html.ActionLink("Mes achats", "Index", "Orders")</li>
+        <li>@Html.ActionLink("Mes achats", "Index", "Orders",null, new { @style = "color:black" })</li>
 
-        <li>@Html.ActionLink("Mes albums", "MyAlbums", "Albums") </li>
+        <li>@Html.ActionLink("Mes albums", "MyAlbums", "Albums",null, new { @style = "color:black" }) </li>
 
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" style="color:black">Se déconnecter</a></li>
     </ul>
     }
 }
