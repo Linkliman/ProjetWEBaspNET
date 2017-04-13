@@ -278,6 +278,14 @@
     <Compile Include="Migrations\201704122316324_AlbumModelVM.Designer.cs">
       <DependentUpon>201704122316324_AlbumModelVM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704130845172_numbermusic.cs" />
+    <Compile Include="Migrations\201704130845172_numbermusic.Designer.cs">
+      <DependentUpon>201704130845172_numbermusic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704130847114_numbermusic1.cs" />
+    <Compile Include="Migrations\201704130847114_numbermusic1.Designer.cs">
+      <DependentUpon>201704130847114_numbermusic1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AlbumModels.cs" />
@@ -446,6 +454,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704122316324_AlbumModelVM.resx">
       <DependentUpon>201704122316324_AlbumModelVM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704130845172_numbermusic.resx">
+      <DependentUpon>201704130845172_numbermusic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704130847114_numbermusic1.resx">
+      <DependentUpon>201704130847114_numbermusic1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

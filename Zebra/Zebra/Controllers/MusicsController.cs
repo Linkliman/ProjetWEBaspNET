@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -28,6 +29,20 @@ namespace Zebra.Controllers
             return View(db.Musics.ToList());
         }
 
+        public bool IsBuy(string currentIdUser, string idMusic)
+        {
+            var isbuybycurrent = new List<OrderModels>();
+            isbuybycurrent = db.Orders.Where(u => u.ID_User.ToString() == currentIdUser.ToString()).Where(u => u.ID_Music.ID.ToString() == idMusic.ToString()).ToList();
+            if (isbuybycurrent.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         // GET: Musics/MusicDetails/5
         public ActionResult MusicDetails(string Id)
         {
@@ -41,7 +56,7 @@ namespace Zebra.Controllers
             }
             FullTrack track = _spotify.GetTrack(Id);
             FullAlbum album = null;
-            //ViewBag.Boolean = OrdersController.IsBuy(User.Identity.GetUserId().ToString(), Id); GROS PROBLEME
+            ViewBag.Boolean = IsBuy(User.Identity.GetUserId().ToString(), Id);
             MusicModels v = new MusicModels
             {
                 ID_Spotify = Id,
@@ -107,13 +122,27 @@ namespace Zebra.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,prix,ID_User,Note")] MusicModels musicModels)
+        public ActionResult Create(MusicModels musicModels, HttpPostedFileBase MusicFile)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && MusicFile != null)
             {
                 musicModels.Created_by=User.Identity.Name;
+                var path = Server.MapPath("~/Content/musique/");
+                var path2 = Server.MapPath("~/Content/trailer/");
+                int fileNumber = Directory.GetFiles(path).Length + 1;
+                musicModels.numberMusic = fileNumber;
                 db.Musics.Add(musicModels);
                 db.SaveChanges();
+                string filename = Path.GetFileName(fileNumber.ToString() + ".mp3");
+                MusicFile.SaveAs(Path.Combine(path, filename));
+
+                string ffPath = Server.MapPath("~/Content/ffmpeg-20170411-f1d80bc-win64-static/bin/ffmpeg.exe");
+                string processString = "-t 20 -i " + Path.Combine(path, filename) + " " + Path.Combine(path2, filename);
+
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo = new System.Diagnostics.ProcessStartInfo(ffPath, processString);
+                p.Start();
+                p.WaitForExit();
                 return RedirectToAction("MyMusics");
             }
 
@@ -186,9 +215,9 @@ namespace Zebra.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Play(int musicID)
+        public ActionResult Play(int musicID, string path)
         {
-            var file = Server.MapPath("~/Content/Musique/" + musicID.ToString() + ".mp3");
+            var file = Server.MapPath("~/Content/"+ path + "/" + musicID.ToString() + ".mp3");
             return File(file, "audio/mp3");
         }
     }

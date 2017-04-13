@@ -22,19 +22,7 @@ namespace Zebra.Controllers
             return View(db.Orders.Where(u => u.ID_User.ToString() == strCurrentUserId).ToList());
         }
 
-        public static bool IsBuy(string currentIdUser, string idMusic)
-        {
-            var isbuybycurrent = new List<OrderModels>();
-            //isbuybycurrent = db.Orders.Where(u => u.ID_User.ToString() == currentIdUser.ToString()).Where(u => u.ID_Music.ToString() == idMusic.ToString()).ToList(); GROS PROBLEME
-            if (isbuybycurrent.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
