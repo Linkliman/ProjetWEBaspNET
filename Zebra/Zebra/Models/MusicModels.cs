@@ -21,6 +21,7 @@ namespace Zebra.Models
         public int Note { get; set; }
         public AlbumModels ID_Album { get; set; }
         public string Album { get; set; }
+        public int numberMusic { get; set; }
 
         public string PreviewUrl { get; set; }
     }
