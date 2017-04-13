@@ -46,12 +46,12 @@ namespace Zebra.Controllers
         // GET: Musics/MusicDetails/5
         public ActionResult MusicDetails(string Id)
         {
-            
-            foreach (var m in db.Musics)
+            List<MusicModels> musics = db.Musics.ToList();
+            foreach (var m in musics)
             {
                 if (m.ID.ToString() == Id)
                 {
-                    return View(m);
+                    return View(db.Musics.Include(mu => mu.ID_Album).Where(mu => mu.ID.ToString().Equals(Id)).First());
                 }
             }
             FullTrack track = _spotify.GetTrack(Id);

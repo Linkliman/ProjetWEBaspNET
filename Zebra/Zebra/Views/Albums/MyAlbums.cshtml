@@ -44,16 +44,6 @@
                 @Html.DisplayFor(modelItem => item.Note)
             </td>
             <td>
-                @if (item.Musics != null)
-                {
-                    foreach (var m in item.Musics)
-                    {
-                        @m.Title
-                        <p> </p>
-                    }
-                }
-            </td>
-            <td>
                 @Html.ActionLink("Add Musics", "Musics", new { id = item.ID }) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ID }) |

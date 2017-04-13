@@ -45,6 +45,9 @@ namespace Zebra.Controllers
         // GET: Albums/Details/5
         public ActionResult Details(string id)
         {
+            int albumID = int.Parse(id);
+            AlbumModels alb = db.Albums.Include(a => a.Musics).Where(a => a.ID == albumID).First();
+            return View(alb);
             FullAlbum album = _spotify.GetAlbum(id);
             AlbumModels v = new AlbumModels
             {
@@ -95,15 +98,15 @@ namespace Zebra.Controllers
         // POST: Albums/Musics
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Musics([Bind(Include = "ID,Title,ReleaseDate,Genre,prix,ID_User,Note,Musics")] AlbumModels albumModels)
+        public ActionResult Musics([Bind(Include = "music")] AlbumModelsVM albumModels)
         {
-            AlbumModels album = new AlbumModels();
-            album = db.Albums.Find(int.Parse(Request.Form["Id"]));
-            album.Musics = new List<MusicModels>();
-            foreach (var m in db.Musics) {
-                if (m.Title == albumModels.Musics.First().Title) {
-                    album.Musics.Add(m);
-                    db.Entry(album).State = EntityState.Modified;
+            int id = int.Parse(Request.Form["Id"]);
+            AlbumModels album = db.Albums.Include(a => a.Musics).Where(a => a.ID == id).First();
+            var musics = db.Musics.ToList();
+            foreach (var m in musics) {
+                if (m.Title == albumModels.music.Title) {
+                    m.ID_Album = album;
+                    db.Entry(m).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("MyAlbums");
                 }
