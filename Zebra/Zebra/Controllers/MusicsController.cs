@@ -1,4 +1,5 @@
-﻿using SpotifyAPI.Web;
+﻿using Microsoft.AspNet.Identity;
+using SpotifyAPI.Web;
 using SpotifyAPI.Web.Enums;
 using SpotifyAPI.Web.Models;
 using System;
@@ -40,6 +41,7 @@ namespace Zebra.Controllers
             }
             FullTrack track = _spotify.GetTrack(Id);
             FullAlbum album = null;
+            //ViewBag.Boolean = OrdersController.IsBuy(User.Identity.GetUserId().ToString(), Id); GROS PROBLEME
             MusicModels v = new MusicModels
             {
                 ID_Spotify = Id,

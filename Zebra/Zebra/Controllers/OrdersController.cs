@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Zebra.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Zebra.Controllers
 {
@@ -17,9 +18,23 @@ namespace Zebra.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.Orders.ToList());
+            string strCurrentUserId = User.Identity.GetUserId();
+            return View(db.Orders.Where(u => u.ID_User.ToString() == strCurrentUserId).ToList());
         }
 
+        public static bool IsBuy(string currentIdUser, string idMusic)
+        {
+            var isbuybycurrent = new List<OrderModels>();
+            //isbuybycurrent = db.Orders.Where(u => u.ID_User.ToString() == currentIdUser.ToString()).Where(u => u.ID_Music.ToString() == idMusic.ToString()).ToList(); GROS PROBLEME
+            if (isbuybycurrent.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         // GET: Orders/Details/5
         public ActionResult Details(int? id)
         {
@@ -38,24 +53,32 @@ namespace Zebra.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            return View();
+            return View("~/Views/Orders/Index.cshtml");
         }
+
+        
 
         // POST: Orders/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ID_User")] OrderModels orderModels)
+        public ActionResult Create(MusicModels music)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(orderModels);
+                OrderModels order = new OrderModels()
+                {
+                    ID_Album = null,
+                    ID_Music = music, //pas sur que ça soit cool qu'on est un id_music de type MusicModels cf plus haut
+                    ID_User = Convert.ToInt32(User.Identity.GetUserId()),
+                };
+                db.Orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(orderModels);
+            return View("~/Views/Orders/Index.cshtml");
         }
 
         // GET: Orders/Edit/5
